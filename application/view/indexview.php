@@ -13,4 +13,13 @@ class indexView {
 		$content = $template -> _run();
 		return $content;
 	}
+	
+	public function showCheck() {
+		$template = new Template('templates', 'checkAuths.tpl');
+		$template -> _loadTemplate();
+		
+		$content = $template -> _run();
+		
+		return $content;
+	}
 }

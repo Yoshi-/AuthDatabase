@@ -24,4 +24,8 @@ class indexController {
 		
 		return $content;
 	}
+	
+	public function checkAction() {
+		return $this -> view -> showCheck();
+	}
 }

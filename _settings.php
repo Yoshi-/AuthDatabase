@@ -8,8 +8,9 @@ if(!isset($_POST['securitytoken'])) {
 	$_SESSION['token'] = $token;
 }
 
-$pw_name = 'RECodenig';
 define('HASH', 'bbb530f2250538b8a139d0406d865c03');
+//Pw for Names.php
+$pw_name = '';
 require('application/frontcontroller.class.php');
 require('application/template.class.php');
 

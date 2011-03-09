@@ -15,13 +15,13 @@
 			<?=$value['name']?>
 		</td>
 		<td>
-			<a href="https://impsoft.net/nexus/onstart.php?prodauth=<?=$value['auth']?>&hash=<?=HASH?>" target="_blank"><?=$value['auth']?></a>
+			<a href="index.php?action=check&auth=<?=$value['auth']?>" target="_blank"><?=$value['auth']?></a>
 		</td>
 		<td>
 			<?=$value['working']?>
 		</td>
 		<td>
-			<a href="index.php?site=rate&rate=<?=$value['rate']?>">
+			<a href="index.php?site=rate&rate=<?=$value['auth']?>">
 				Disabled
 			</a>
 		</td>
