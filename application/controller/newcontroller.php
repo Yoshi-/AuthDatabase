@@ -5,7 +5,7 @@ class newController {
 	private $view;	
 	
 	public function __construct() {
-		$this -> model = new rateModel();
+		$this -> model = new newModel();
 		$this -> view = new newView();
 	}
 	
