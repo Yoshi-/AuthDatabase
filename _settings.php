@@ -9,6 +9,8 @@ if(!isset($_POST['securitytoken'])) {
 }
 
 define('HASH', 'bbb530f2250538b8a139d0406d865c03');
+//Pw for Names.php
+$pw_name = '';
 require('application/frontcontroller.class.php');
 require('application/template.class.php');
 
