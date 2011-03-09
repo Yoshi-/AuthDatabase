@@ -28,4 +28,4 @@ class indexController {
 	public function checkAction() {
 		return $this -> view -> showCheck();
 	}
-}
+} 
