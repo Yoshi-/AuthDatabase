@@ -7,8 +7,9 @@ if(!isset($_POST['securitytoken'])) {
 	$token = md5(uniqid());
 	$_SESSION['token'] = $token;
 }
-$pw_name = 'PWD goes Here';
 
+$pw_name = 'RECodenig';
+define('HASH', 'bbb530f2250538b8a139d0406d865c03');
 require('application/frontcontroller.class.php');
 require('application/template.class.php');
 
@@ -24,7 +25,7 @@ function getName($key) {
 
 function __autoload($class_name) {
 	$class_name = strtolower($class_name);
-	
+
 	if(stripos($class_name, 'controller')) {
 		$path = 'application/controller/'.$class_name.'.php';
 	}
