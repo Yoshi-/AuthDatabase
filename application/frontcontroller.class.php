@@ -4,8 +4,8 @@ class FrontController {
 	private $controller;
 
 	public function __construct() {
-		$this -> action = isset($_GET["action"]) ? ucfirst(strtolower($_GET["action"])) : "index";
-		$this -> controller = isset($_GET["site"]) ? ucfirst(strtolower($_GET["site"])) : "index";
+		$this -> action = isset($_GET["action"]) ? strtolower($_GET["action"]) : "index";
+		$this -> controller = isset($_GET["site"]) ? strtolower($_GET["site"]) : "index";
 
 		$this -> controller .= 'Controller';
 		$this -> action .= 'Action';

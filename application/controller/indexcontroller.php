@@ -17,7 +17,7 @@ class indexController {
 		return $content;
 	}
 	
-	public function FilterAction() {
+	public function filterAction() {
 		$auths = $this -> model -> getAuths($_GET['filter']);
 		$filter = $this -> model -> getFilter($_GET['filter']);
 		$content = $this -> view -> showAuths($auths, $filter);
