@@ -3,9 +3,10 @@ mysql_connect($host, $user, $pwd);
 mysql_select_db($db);
 
 session_start();
-
-$token = md5(uniqid());
-$_SESSION['token'] = $token;
+if(!isset($_POST['securitytoken'])) {
+	$token = md5(uniqid());
+	$_SESSION['token'] = $token;
+}
 $pw_name = 'PWD goes Here';
 
 require('application/frontcontroller.class.php');
