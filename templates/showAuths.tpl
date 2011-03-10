@@ -2,7 +2,7 @@
 	function getPage(link) {
 		  $('#dialog').show()
 		  $("#frame").attr("src", "https://impsoft.net/nexus/onstart.php?prodauth=" + link + "&hash=bbb530f2250538b8a139d0406d865c03");
-		  $('#dialog a:first').attr("href", 'index.php?site=rate&rate=' + link);
+		  $('#dialog a:first').attr("href", 'javascript:rateAuth("' + link + '");');
 	}
 
 	function hide() {
@@ -10,7 +10,18 @@
 		$("#frame").attr("src", '');
 		$('#dialog a:first').attr("href", '');
 	}
-	</script>
+	function rateAuth(auth, uprate) {
+		if(uprate) rate = 'uprate';
+		else rate = 'rate';
+		$.get(
+			'index.php', 
+			{rate : auth, 
+			"site" : "rate", 
+			"noindex" : "1"},
+			function(data) {alert(data);}
+		);
+	}	
+</script>
 <style type="text/css">
 	#dialog {  
 		position:absolute;  
@@ -54,7 +65,7 @@
 			<?=$value['working']?>
 		</td>
 		<td>
-			<a href="index.php?site=rate&rate=<?=$value['auth']?>">
+			<a href="javascript:rateAuth('<?=$value['auth']?>');">
 				Disabled
 			</a>
 		</td>

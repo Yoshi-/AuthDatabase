@@ -17,12 +17,14 @@ class FrontController {
 		if(in_array($this->action, get_class_methods($controller))) {
 			
 			$content = $controller->{$this->action}();
-			$template = new Template('templates', 'index.tpl');
-
-			$template -> addVariable('content', $content)
-						  -> _loadTemplate();		  
-			echo $template -> _run();
-	
+			if(isset($_GET['noindex'])) echo $content;
+			else {
+				$template = new Template('templates', 'index.tpl');
+				
+				$template -> addVariable('content', $content)
+							  -> _loadTemplate();		  
+				echo $template -> _run();
+			}
 		}
 		else {
 			throw new Exception("Action wasnt found");
