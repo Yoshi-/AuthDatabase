@@ -8,7 +8,11 @@ if(!isset($_POST['securitytoken'])) {
 	$_SESSION['token'] = $token;
 }
 
+
 define('HASH', 'bbb530f2250538b8a139d0406d865c03');
+
+define('_Auths_Per_Page', 75);
+define('_Remove_Disabled', -3);
 //Pw for Names.php
 $pw_name = '';
 require('application/frontcontroller.class.php');

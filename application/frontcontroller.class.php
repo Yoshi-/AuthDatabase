@@ -27,7 +27,7 @@ class FrontController {
 			}
 		}
 		else {
-			throw new Exception("Action wasnt found");
+			throw new Exception("Action wasnt found " . $this->action);
 		}
 	}
 }

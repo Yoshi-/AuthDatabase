@@ -1,19 +1,9 @@
 <script type="text/javascript">
 	function getPage(link, id) {
-		  $('#dialog').show()
+		  $('#dialog').show();
 		  $("#frame").attr("src", "https://impsoft.net/nexus/onstart.php?prodauth=" + link + "&hash=<?=HASH?>");
 		  $('#dialog a:first').attr("href", 'javascript:rateAuth("' + id + '", "true");');
 		  $('#dialog a:first').next().attr("href", 'javascript:rateAuth("' + id + '");');
-		  /*
-		  var detail = checkAuth(link);
-			if(s.indexOf("incomplete") != -1){
-				detail = "Server did not reply, please try again";
-			} else if(s.indexOf("Disabled") != -1){
-				detail = "Code is disabled. Please Down-Vote!";
-			} else {
-				detail = "Code is valid. Please Up-Vote!";
-			}
-		  alert(detail);*/
 	}
 
 	function hide() {
@@ -31,17 +21,6 @@
 				alert(data);
 			});
 	}	
-	function checkAuth(auth) {
-		var result = "incomplete";
-		$().ready(function(){ 
- 		   var url = 'https://impsoft.net/nexus/onstart.php?prodauth=' + auth + '&hash=<?=HASH?>';
-	    $.get(url, function(data) {
-	    	result = data;    
-	    });
-	});
-		return result;
-    	}
-		
 		function getAuth(authID) {
 			$.get(
 			'index.php?site=auth&authID=' + authID + '&noindex=1', 
@@ -52,20 +31,11 @@
 </script>
 
 <center>
-<div id="dialog" style="position:fixed;top:200px;display:none;margin-left:35%;width:500px;">
-	<div id="imgPreview">
-	Please Wait while Auth is loaded.<br/>
-	<a href="">Up-Vote</a> | 
-	<a href="">Down-Vote</a> | 
-	<a href="javascript:hide();">Close</a><br/>
-	<iframe id="frame" style="border: 0px;background-color:white;" SRC="" width="500" height = "70" scrolling="no" scrollbarvisable="no" >Please wait until the site is loaded.</iframe><br/>
-	<font style="background-color: black" color="red">If you see "Code Disabled" please click Down-Vote. If you see the script name, press Up-Vote.</font>
-	</div>
-</div>
 <div style="float:left;margin-left:10%;position:fixed;">
 <?=$filter?>
 </div>
 <div id="imgPreview" align="center">
+<?=$page;?>
 <table cellspacing="3" cellpadding="3" border="0" id="rounded">
 	<tr>
 		<td><h2>Script Name</h2></td>
@@ -76,7 +46,7 @@
 	<?php foreach($Auths as $key=>$value):?>
 	<?php
 				$val=$value['working'];
-				if($val < -3){
+				if($val < _Remove_Disabled){
 					continue;
 				}
 	?>
@@ -86,13 +56,12 @@
 		</td>
 		<td id="rounded">
 			<div id="Auth_<?=$value['rate']?>">
-				<a href="javascript:getAuth('<?=$value['rate']?>')"?> Show Auth </a>
+				<a href="javascript:getAuth('<?=$value['rate']?>')"?> Show Code </a>
 			</div>
 		</td>
 		<td align="center" id="rounded">
 			<?php
-				$val=$value['working'];
-				echo $val;
+				echo $value['working'];
 			?>
 		</td>
 		<td align="center" id="rounded">
@@ -102,7 +71,16 @@
 	</tr>
 	<?php endforeach; ?>
 </table>
+<?=$page;?>
 </div>
 </center>
-
-
+<div id="dialog" style="display: none; position: fixed; width: 260px; top: 95px; right: 30px;">
+	<div id="imgPreview">
+	Please Wait while Auth is loading.<br />
+	<a href="" id="prefSave"></a> | 
+	<a href="" id="deleteButton"></a> | 
+	<a href="javascript:hide();">Close</a><br />
+	<iframe id="frame" style="border: 0px;background-color:white;" SRC="" width="250" height="300" scrolling="no" scrollbarvisable="no" >Please wait until the site is loaded.</iframe><br/>
+	<font style="background-color: black" color="red">If you see "Code Disabled" please click Down-Vote. If you see the script name, press Up-Vote.</font>
+	</div>
+</div>

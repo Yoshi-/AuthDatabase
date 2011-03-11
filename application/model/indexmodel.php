@@ -9,7 +9,12 @@ class indexModel {
 			$where .= ' auths.key = "'.mysql_real_escape_string($value).'"';
 		}
 		
-		$res = mysql_query("SELECT * FROM auths ".$where." ORDER BY working DESC,authID DESC");
+		if(isset($_GET['page'])) $page = (int) $_GET['page'];
+		else $page = 1;
+		
+		if($page < 1) $page = 1;
+		
+		$res = mysql_query("SELECT * FROM auths ".$where." ORDER BY working DESC,authID DESC LIMIT ".(($page - 1) * _Auths_Per_Page).", "._Auths_Per_Page);
 
 		$Auths = Array();
 		while($ds = mysql_fetch_array($res)) {
@@ -28,5 +33,21 @@ class indexModel {
 			$names[] = Array('name' => $ds['name'], 'key' => $ds['key'], 'selected' => $selected);
 		}	
 		return $names;
+	}
+	
+	public function getHighestPage() {
+		if(isset($_GET['filter'])) $filter = $_GET['filter'];
+		else $filter = array();
+		
+		$where = '';
+		foreach($filter as $key=>$value) {
+			if($key == 0) $where = 'WHERE';
+			else $where .= ' OR ';
+			$where .= ' auths.key = "'.mysql_real_escape_string($value).'"'; 
+		}
+		$res = mysql_query("SELECT * FROM auths ".$where."");
+		$num = mysql_num_rows($res);
+		$page_number = ceil($num / _Auths_Per_Page);
+		return $page_number;
 	}
 }

@@ -10,17 +10,13 @@ class indexController {
 	}
 	
 	public function indexAction() {
-		$auths = $this -> model -> getAuths();
-		$filter = $this -> model -> getFilter();
-		$content = $this -> view -> showAuths($auths, $filter);
+		if(isset($_GET['filter']) AND is_array($_GET['filter'])) $filter_arr = $_GET['filter'];
+		else $filter_arr = array();
 		
-		return $content;
-	}
-	
-	public function filterAction() {
-		$auths = $this -> model -> getAuths($_GET['filter']);
-		$filter = $this -> model -> getFilter($_GET['filter']);
-		$content = $this -> view -> showAuths($auths, $filter);
+		$page_number = $this -> model -> getHighestPage();
+		$auths = $this -> model -> getAuths($filter_arr);
+		$filter = $this -> model -> getFilter($filter_arr);
+		$content = $this -> view -> showAuths($auths, $filter, $page_number);
 		
 		return $content;
 	}
