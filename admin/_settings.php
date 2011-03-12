@@ -13,8 +13,7 @@ define('HASH', 'bbb530f2250538b8a139d0406d865c03');
 
 define('_Auths_Per_Page', 75);
 define('_Remove_Disabled', -3);
-//Pw for Names.php
-$pw_name = '';
+define('_PWD', 'RECode599');
 require('application/autoloader.class.php');
 
 spl_autoload_register('autoloader::load');
@@ -32,14 +31,4 @@ function getName($key) {
 	else return 'UNKNOWN';
 }
 
-function getUserLink($userid) {
-	global $vbulletin;
-	
-	$res = mysql_query("SELECT username,opentag,closetag FROM vB_user WHERE userid = '".$userid."'");
-	if(mysql_num_rows($res)) {
-		$ds = mysql_fetch_assoc();
-		$name = '<a href="member.php?u='.$vbulletin->userinfo["userid"].'">'.$ds["opentag"].$ds["username"].$ds["closetag"].'</a>';
-	} else $name = '';
-	return $name;
-}
 

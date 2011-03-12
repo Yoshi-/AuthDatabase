@@ -68,9 +68,6 @@
 			<input type="button" onclick="rateAuth('<?=$value['rate']?>', 'true');" id="prefSave">
 			<input type="button" onclick="rateAuth('<?=$value['rate']?>');" id="deleteButton">
 		</td>
-		<td align="center" id="rounded">
-			<?=getUserLink($value['username'])?>
-		</td>
 	</tr>
 	<?php endforeach; ?>
 </table>

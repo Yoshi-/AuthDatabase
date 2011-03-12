@@ -29,6 +29,12 @@ elseif((isset($_POST['pwd']) AND $_POST['pwd'] == $pw_name) OR (isset($_SESSION[
 	$query = "SELECT a.auth,a.key,n.name FROM auths a LEFT JOIN names n ON n.key=a.key WHERE n.name IS NULL";
 	$res = mysql_query($query);
 	
+	$template = new Template('templates', 'addNames.tpl');
+	
+	$template -> addVariable('res', $res)
+			  -> _loadTemplate();
+			  
+	$content = $template -> _run();
 }
 else {
 	$template = new Template('templates', 'login.tpl');

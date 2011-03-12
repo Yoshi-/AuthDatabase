@@ -18,7 +18,7 @@ class indexModel {
 
 		$Auths = Array();
 		while($ds = mysql_fetch_array($res)) {
-			$Auths[] = Array('name' => getName($ds['key']), 'auth' => $ds['auth'], 'working' => $ds['working'], 'rate' => $ds['authID'], 'username' => $ds['name']);
+			$Auths[] = Array('name' => getName($ds['key']), 'auth' => $ds['auth'], 'working' => $ds['working'], 'rate' => $ds['authID']);
 		}
 		return $Auths;
 	}

@@ -1,0 +1,1 @@
+<?phpclass loginModel {	public function login($pwd) {	if($pwd == _PWD) {		$_SESSION['logged'] = 1;		return 'Login successful';	}	else return 'Wrong PW';	}}

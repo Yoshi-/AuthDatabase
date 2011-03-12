@@ -1,0 +1,1 @@
+<form action='index.php?site=names&action=saveEdit' method='post'>	Key <input type='text' name='key' value='<?=$name['key']?>' /><br />	Name <input type='text' name='name' value='<?=$name['name']?>' /><br />	<input type='hidden' name='nameID' value='<?=$name['nameID']?>' />	<input type='submit' value='editName' /></form>
