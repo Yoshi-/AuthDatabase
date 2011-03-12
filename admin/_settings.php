@@ -13,8 +13,29 @@ define('HASH', 'bbb530f2250538b8a139d0406d865c03');
 
 define('_Auths_Per_Page', 75);
 define('_Remove_Disabled', -3);
-//Pw for Names.php
-$pw_name = '';
+define('_PWD', 'RECode599');
+
+function hasAdmin($usergroupid) {
+	$groupsarr = "22 26 13 12 11 7 6 5";
+    $validgroup = explode(" ", $groupsarr);
+
+    foreach ($validgroup as $x) {
+        if ($usergroupid == $x) {
+            return true;
+        }
+    }
+    return false;
+}
+
+chdir('../../');
+include('./global.php');  
+chdir('authdb/admin/');
+
+if(!hasAdmin($vbulletin->userinfo["usergroupid"])) {
+	header("Location: http://recoders.org/login.php");
+	exit;
+}
+
 require('application/autoloader.class.php');
 
 spl_autoload_register('autoloader::load');
@@ -32,13 +53,7 @@ function getName($key) {
 	else return 'UNKNOWN';
 }
 
-function getUserLink($userid) {
-	$res = mysql_query("SELECT username FROM vB_user WHERE userid = '".$userid."'");
 
-	if(mysql_num_rows($res)) {
-		$ds = mysql_fetch_assoc();
-		$name = '<a href="member.php?u='.$userid.'">'.$ds["username"].'</a>';
-	} else $name = '';
-	return $name;
-}
-
+$res = mysql_query("SELECT username,opentag,closetag FROM vB_user WHERE userid = '".$userid."'");
+echo mysql_error();
+echo "SELECT username,opentag,closetag FROM vB_user WHERE userid = '".$userid."'";
