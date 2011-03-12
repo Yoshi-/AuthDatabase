@@ -11,11 +11,7 @@ class FrontController {
 		$this -> action .= 'Action';
 	}
 
-	public function run() {
-		if(!isset($_SESSION['logged']) OR $_SESSION['logged'] != 1 AND $this -> controller != 'loginController') {
-			$this -> controller = 'loginController';
-		}
-		
+	public function run() {		
 		$controller = new $this->controller;
 
 		if(!in_array($this->action, get_class_methods($controller))) 
