@@ -13,7 +13,8 @@ define('HASH', 'bbb530f2250538b8a139d0406d865c03');
 
 define('_Auths_Per_Page', 75);
 define('_Remove_Disabled', -3);
-define('_PWD', 'RECode599');
+//Pw for Names.php
+$pw_name = '';
 require('application/autoloader.class.php');
 
 spl_autoload_register('autoloader::load');
@@ -31,4 +32,13 @@ function getName($key) {
 	else return 'UNKNOWN';
 }
 
+function getUserLink($userid) {
+	$res = mysql_query("SELECT username FROM vB_user WHERE userid = '".$userid."'");
+
+	if(mysql_num_rows($res)) {
+		$ds = mysql_fetch_assoc();
+		$name = '<a href="member.php?u='.$userid.'">'.$ds["username"].'</a>';
+	} else $name = '';
+	return $name;
+}
 
