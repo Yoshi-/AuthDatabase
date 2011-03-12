@@ -39,10 +39,9 @@ class indexModel {
 		if(isset($_GET['filter'])) $filter = $_GET['filter'];
 		else $filter = array();
 		
-		$where = '';
+		$where = 'WHERE working > '._Remove_Disabled;
 		foreach($filter as $key=>$value) {
-			if($key == 0) $where = 'WHERE';
-			else $where .= ' OR ';
+			$where .= ' OR ';
 			$where .= ' auths.key = "'.mysql_real_escape_string($value).'"'; 
 		}
 		$res = mysql_query("SELECT * FROM auths ".$where."");
