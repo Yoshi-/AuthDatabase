@@ -1,27 +1,103 @@
 <?php
-class newModel {
-	public function saveAuths($auths) {
-		global $vbulletin;
-		if(isset($_POST['securitytoken']) AND isset($_SESSION['token']) AND $_SESSION['token'] == $_POST['securitytoken']) {
-			unset($_SESSION['token']);
-			if(isset($_POST['Auths'])) {
-				$auths = $_POST['Auths'];
-				preg_match_all('([0-9][0-9]?[0-9][xX][zZ][A-Z0-9]{5,13})', $auths, $matches);
-				$insert = "VALUES ";
-				foreach($matches[0] as $value) {
-					$key = explode('xz', mb_strtolower($value));
-					$insert .= '(NULL , "'.mysql_real_escape_string(htmlentities($value)).'", "0", "'.mysql_real_escape_string(htmlentities($key[0])).'", "'.$vbulletin->userinfo["userid"].'"),';
-				}
-				$insert = trim($insert, ',');
-				$query = "INSERT IGNORE INTO `auths` (`authID` ,`auth` ,`working` ,`key`, `name`) ". $insert;
+class indexView {
+	public function showAuths($auths = array(), $names = array(), $page_number = 1) {
+		if(isset($_GET['page'])) $page = (int) $_GET['page'];
+		else $page = 1;
+		
+		if($page < 1) $page = 1;
+		
+		$pageLink = '';
+		$data = $_GET;
+		
+		if(isset($data['page'])) unset($data['page']);
+		$i = 1;
+		while($i <= $page_number) {
+			$data['page'] = $i;
+			if(isset($data['pagenumber'])) unset($data['pagenumber']);
 
-				$res = mysql_query($query);
-				$content = 'Auths added';
+			$pageLink .= '';
+
+			if($i == $page) {
+				$pageLink .='<b>' . $i .'</b> ';
+			} else {
+					$pageLink .='<a href="index.php?'.http_build_query($data).'">' . $i . '</a> ';
 			}
-			else $content = 'No Auths were sent';
-		}
-		else $content = 'Please use the Form on our site';
+			$i++;
+		}		
+		$template = new Template('templates', 'filter.tpl');
+		$template -> addVariable('names', $names)
+				  -> _loadTemplate();
+<?php
+class indexView {
+	public function showAuths($auths = array(), $names = array(), $page_number = 1) {
+		if(isset($_GET['page'])) $page = (int) $_GET['page'];
+		else $page = 1;
+		
+		if($page < 1) $page = 1;
+
+		$data = $_GET;
+		if(isset($data['page'])) unset($data['page']);
+		if(isset($data['pagenumber'])) unset($data['pagenumber']);
+
+		$pageLink = '<form action="index.php?'.http_build_query($data).'" method="post">';
+
+	
+		$i = 1;
+		while($i <= $page_number) {
+			$data['page'] = $i;
+
+			$pageLink .= '';
+
+			if($i == $page) {
+				$pageLink .='<b>' . $i .'</b> ';
+			} else {
+					$pageLink .= '<option value="'.$i.'">Page ' . $i . '</option> ';
+			}
+			$i++;
+		}		
+
+		$pageLink .= '</form>';
+
+		$template = new Template('templates', 'filter.tpl');
+		$template -> addVariable('names', $names)
+				  -> _loadTemplate();
+				  -> addVariable('page', $pageLink)
+		$filter = $template -> _run();
+			
+		$template = new Template('templates', 'showAuths.tpl');
+		$template -> addVariable('Auths', $auths)
+				  -> addVariable('filter', $filter)
+				  -> addVariable('page', $pageLink)
+				  -> _loadTemplate();
+		$content = $template -> _run();
+		return $content;
+	}
+	
+	public function showCheck() {
+		$template = new Template('templates', 'checkAuths.tpl');
+		$template -> _loadTemplate();
+		
+		$content = $template -> _run();
 		
 		return $content;
 	}
-}
+} 
+		$filter = $template -> _run();
+			
+		$template = new Template('templates', 'showAuths.tpl');
+		$template -> addVariable('Auths', $auths)
+				  -> addVariable('filter', $filter)
+				  -> _loadTemplate();
+		$content = $template -> _run();
+		return $content;
+	}
+	
+	public function showCheck() {
+		$template = new Template('templates', 'checkAuths.tpl');
+		$template -> _loadTemplate();
+		
+		$content = $template -> _run();
+		
+		return $content;
+	}
+} 
