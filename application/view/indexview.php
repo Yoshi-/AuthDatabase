@@ -13,13 +13,18 @@ class indexView {
 		$i = 1;
 		while($i <= $page_number) {
 			$data['page'] = $i;
-			
+			if(isset($data['pagenumber'])) unset($data['pagenumber']);
+
 			$pageLink .= '';
 
 			if($i == $page) {
 				$pageLink .='<b>' . $i .'</b> ';
 			} else {
 					$pageLink .='<a href="index.php?'.http_build_query($data).'">' . $i . '</a> ';
+			}
+			if($i == 6) {
+				$pageLink .== ' ... ';
+				$i = $page_number - 5;
 			}
 			$i++;
 		}		
