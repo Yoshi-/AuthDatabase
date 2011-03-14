@@ -9,7 +9,7 @@ class indexModel {
 			$where .= ' auths.key = "'.mysql_real_escape_string($value).'"';
 		}
 		
-		if(isset($_GET['page'])) $page = (int) $_GET['page'];
+		if(isset($_REQUEST['page'])) $page = (int) $_REQUEST['page'];
 		else $page = 1;
 		
 		if($page < 1) $page = 1;
@@ -41,7 +41,7 @@ class indexModel {
 		
 		$where = 'WHERE working > '._Remove_Disabled;
 		foreach($filter as $key=>$value) {
-			$where .= ' OR ';
+			$where .= ' AND ';
 			$where .= ' auths.key = "'.mysql_real_escape_string($value).'"'; 
 		}
 		$res = mysql_query("SELECT * FROM auths ".$where."");
