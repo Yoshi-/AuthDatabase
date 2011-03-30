@@ -27,7 +27,7 @@ class indexModel {
 	}
 	
 	public function getFilter($filter = array()) {
-		$res = mysql_query("SELECT * FROM names ORDER BY name ASC");
+		$res = mysql_query("SELECT n.* FROM auths a LEFT JOIN names n ON a.key = n.key WHERE a.working > ". _Remove_Disabled." AND n.name IS NOT NULL GROUP BY (a.key) ORDER BY n.name");
 
 		$names = Array();
 		while($ds = mysql_fetch_array($res)) {
