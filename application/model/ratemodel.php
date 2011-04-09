@@ -9,11 +9,11 @@ class rateModel {
 			if(mysql_num_rows($res)) {
 				return "Only 1 Vote per Ip/Auth";
 			}
-			if(isset($_GET['type']) AND $_GET['type'] = 'down') {
-				mysql_query("UPDATE `auths` SET `working` = working -1 WHERE `authID` ='".$rate."'");
+			if(isset($_GET['type']) AND $_GET['type'] == 'uprate') {
+				mysql_query("UPDATE `auths` SET `working` = working +1 WHERE `authID` ='".$rate."'");
 			}
 			else {
-				mysql_query("UPDATE `auths` SET `working` = working +1 WHERE `authID` ='".$rate."'");
+				mysql_query("UPDATE `auths` SET `working` = working -1 WHERE `authID` ='".$rate."'");
 			}
 			mysql_query("INSERT INTO `rate` (`rateID` ,`ip` ,`authID`)VALUES (NULL , '".$client_ip."', '".$rate."');");
 			return 'Rate accepted';
