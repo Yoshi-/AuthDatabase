@@ -23,6 +23,6 @@ class indexController extends baseController {
 	}
 	
 	public function errorAction() {
-		return return $this -> indexAction();
+		return $this -> indexAction();
 	}
 } 
