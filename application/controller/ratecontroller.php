@@ -1,5 +1,5 @@
 <?php
-class rateController {
+class rateController extends baseController {
 
 	private $model;
 	private $view;	
@@ -18,5 +18,9 @@ class rateController {
 		$content = $this -> view -> rate($res);
 		
 		return $content;
+	}
+	
+	public function errorAction() {
+		return $this -> indexAction();
 	}
 }

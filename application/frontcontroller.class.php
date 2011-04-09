@@ -12,23 +12,43 @@ class FrontController {
 	}
 
 	public function run() {
-		$controller = new $this->controller;
-
-		if(in_array($this->action, get_class_methods($controller))) {
-			
-			$content = $controller->{$this->action}();
-			if(isset($_GET['noindex'])) echo $content;
-			else {
-				$template = new Template('templates', 'index.tpl');
-				
-				$template -> addVariable('content', $content)
-							  -> _loadTemplate();		  
-				echo $template -> _run();
-			}
+		if($this -> checkController($this->controller)) {
+			$controller = new $this->controller;
 		}
 		else {
-			throw new Exception("Action wasnt found " . $this->action);
+			$controller = new errorController();
+			$this -> action = 'indexAction';
 		}
+		
+
+		if(in_array($this->action, get_class_methods($controller))) {
+			$action = $this -> action;
+		}
+		else {
+			$action = 'errorAction';
+		}
+		
+		$content = $controller->{$action}();
+		if(isset($_GET['noindex'])) echo $content;
+		else {
+			$template = new Template('templates', 'index.tpl');
+			
+			$template -> addVariable('content', $content)
+						  -> _loadTemplate();		  
+			echo $template -> _run();
+		}
+
+	}
+	
+	private function checkController($class_name) {
+		$class_name = strtolower($class_name);
+		
+		$path = 'application/controller/'.$class_name.'.php';
+		
+		if(file_exists($path)) {
+			return true;
+		}
+		return false;
 	}
 }
 

@@ -1,5 +1,5 @@
 <?php
-class newController {
+class newController extends baseController {
 	
 	private $model;
 	private $view;	
@@ -24,5 +24,8 @@ class newController {
 		$content = $this -> view -> savedAuths($auths);
 		
 		return $content;
+	}
+	public function errorAction() {
+		return $this -> indexAction();
 	}
 }

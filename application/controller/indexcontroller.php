@@ -1,9 +1,6 @@
 <?php
-class indexController {
+class indexController extends baseController {
 
-	private $model;
-	private $view;	
-	
 	public function __construct() {
 		$this -> model = new indexModel();
 		$this -> view = new indexView();
@@ -23,5 +20,9 @@ class indexController {
 	
 	public function checkAction() {
 		return $this -> view -> showCheck();
+	}
+	
+	public function errorAction() {
+		return return $this -> indexAction();
 	}
 } 
