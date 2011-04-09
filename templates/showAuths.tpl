@@ -1,4 +1,5 @@
 <script type="text/javascript">
+	token = '<?=$_SESSION['token']?>';
 	function getPage(link, id) {
 		  $('#dialog').show();
 		  $("#frame").attr("src", "https://impsoft.net/nexus/onstart.php?prodauth=" + link + "&hash=<?=HASH?>");
@@ -16,7 +17,7 @@
 		if(uprate) rate = 'uprate';
 		else rate = 'downrate';
 		$.get(
-			'index.php?site=rate&' + rate + '=' + auth + '&noindex=1', 
+			'index.php?site=rate&rate=' + auth + '&type=' + rate + '&securitytoken=' + token + '&noindex=1', 
 			function(data) {
 				alert(data);
 			});

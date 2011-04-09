@@ -3,7 +3,7 @@ mysql_connect($host, $user, $pwd);
 mysql_select_db($db);
 
 session_start();
-if(!isset($_POST['securitytoken'])) {
+if(!isset($_REQUEST['securitytoken'])) {
 	$token = md5(uniqid());
 	$_SESSION['token'] = $token;
 }
