@@ -17,7 +17,7 @@ class indexModel {
 		
 		if($page < 1) $page = 1;
 		
-		$res = mysql_query("SELECT * FROM auths ".$where." ORDER BY working DESC,authID DESC LIMIT ".(($page - 1) * _Auths_Per_Page).", "._Auths_Per_Page);
+		$res = mysql_query("SELECT * FROM auths ".$where." GROUP BY (auths.key) ORDER BY working DESC,authID DESC LIMIT ".(($page - 1) * _Auths_Per_Page).", "._Auths_Per_Page);
 		
 		$Auths = Array();
 		while($ds = mysql_fetch_array($res)) {
@@ -51,7 +51,7 @@ class indexModel {
 		}
 		if(strlen($filter_query)) $where = $where . ' AND (' . $filter_query .')';
 		
-		$res = mysql_query("SELECT * FROM auths ".$where."");
+		$res = mysql_query("SELECT * FROM auths ".$where." GROUP BY (auths.key)");
 		$num = mysql_num_rows($res);
 		$page_number = ceil($num / _Auths_Per_Page);
 		return $page_number;
