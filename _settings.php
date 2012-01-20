@@ -8,13 +8,15 @@ if(!isset($_REQUEST['securitytoken'])) {
 	$_SESSION['token'] = $token;
 }
 
-
-define('HASH', 'bbb530f2250538b8a139d0406d865c03');
-
-define('_Auths_Per_Page', 75);
+define('_Auths_Per_Page', 200);
 define('_Remove_Disabled', -3);
+
+require("_auth.php");
+define('HASH', file_get_contents('hash.txt'));
+
 //Pw for Names.php
-$pw_name = '';
+define('_PWD', 'RECode599'); //names.php is obsolete
+
 require('application/autoloader.class.php');
 
 spl_autoload_register('autoloader::load');
@@ -29,7 +31,13 @@ function getName($key) {
 		$ds = mysql_fetch_array($res);
 		return $ds['name'];
 	}
-	else return 'UNKNOWN';
+	else return 'Unknown';
 }
 
+
+function alreadyChecked($authID) {
+	$res = mysql_query('SELECT * FROM showed WHERE userID="'._UserID.'" AND authID ="'.$authID.'"');
+	$anz = mysql_num_rows($res);
+	return $anz;
+}
 

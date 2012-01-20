@@ -12,8 +12,8 @@
 		$("#frame").attr("src", '');
 		$('#dialog a:first').attr("href", '');
 		$('#dialog a:second').attr("href", '');
-	}
-	function rateAuth(auth, uprate) {
+	}	
+function rateAuth(auth, uprate) {
 		if(uprate) rate = 'uprate';
 		else rate = 'downrate';
 		$.get(
@@ -31,57 +31,69 @@
 		}
 </script>
 
-<center>
-<div style="float:left;margin-left:10%;position:fixed;">
-<?=$filter?>
-</div>
-<div id="imgPreview" align="center">
-<?=$page;?>
-<table cellspacing="3" cellpadding="3" border="0" id="rounded">
-	<tr>
-		<td><h2>Script Name</h2></td>
-		<td><h2>Code</h2></td>
-		<td><h2>Rating</h2></td>
-		<td><h2>Vote</h2></td>
-	</tr>
-	<?php foreach($Auths as $key=>$value):?>
-	<?php
-				$val=$value['working'];
-				if($val < _Remove_Disabled){
-					continue;
-				}
-	?>
-	<tr>
-		<td id="rounded">
-			<?=$value['name']?>
-		</td>
-		<td id="rounded">
-			<div id="Auth_<?=$value['rate']?>">
-				<a href="javascript:getAuth('<?=$value['rate']?>')"?> Show Code </a>
-			</div>
-		</td>
-		<td align="center" id="rounded">
-			<?php
-				echo $value['working'];
-			?>
-		</td>
-		<td align="center" id="rounded">
-			<input type="button" onclick="rateAuth('<?=$value['rate']?>', 'true');" id="prefSave">
-			<input type="button" onclick="rateAuth('<?=$value['rate']?>');" id="deleteButton">
-		</td>
-	</tr>
-	<?php endforeach; ?>
-</table>
-<?=$page;?>
-</div>
-</center>
-<div id="dialog" style="display: none; position: fixed; width: 260px; top: 95px; right: 30px;">
-	<div id="imgPreview">
-	Please Wait while Auth is loading.<br />
-	<a href="" id="prefSave"></a> | 
-	<a href="" id="deleteButton"></a> | 
-	<a href="javascript:hide();">Close</a><br />
-	<iframe id="frame" style="border: 0px;background-color:white;" SRC="" width="250" height="300" scrolling="no" scrollbarvisable="no" >Please wait until the site is loaded.</iframe><br/>
-	<font style="background-color: black" color="red">If you see "Code Disabled" please click Down-Vote. If you see the script name, press Up-Vote.</font>
-	</div>
+<div id="page" align="center">
+    <div style="float:left;margin-left:5%;position:fixed;">
+        <?=$filter?>
+    </div>
+    
+    <div id="imgPreview" align="center">
+    <?=$page;?>
+    <table cellspacing="5" cellpadding="5" border="0" bordercolor="white" id="rounded">
+    	<tr>
+    		<td><h2>Script Name</h2></td>
+    		<td><h2>Code</h2></td>
+    		<td><h2>Rating</h2></td>
+    		<td><h2>Vote</h2></td>
+    		<td><h2>From</h2></td>
+    	</tr>
+    	<?php foreach($Auths as $key=>$value):?>
+    	<?php
+    				$val=$value['working'];
+    				if($val < _Remove_Disabled){
+    					continue;
+    				}
+    	?>
+    	<tr>
+    		<td>
+    			<?=$value['name']?>
+    		</td>
+    		<td>
+    		<?php if(alreadyChecked($value['rate'])  > 0) {?>
+    			<div id="Auth_<?=$value['rate']?>">
+    				<a id="dialog_trigger" href="javascript:getPage('<?=$value['auth']?>', '<?=$value['rate']?>')"><?=$value['auth']?></a>
+    			</div>
+    			<?php } else {?>
+    			<div id="Auth_<?=$value['rate']?>">
+    				<a href="javascript:getAuth('<?=$value['rate']?>')"?> Show Code </a>
+    			</div>
+    			<?php } ?>
+    		</td>
+    		<td align="center">
+    			<?php
+    				echo $value['working'];
+    			?>
+    		</td>
+    		<td align="center">
+    			<input type="button" onclick="rateAuth('<?=$value['rate']?>', 'true');" id="prefSave">
+    			<input type="button" onclick="rateAuth('<?=$value['rate']?>');" id="deleteButton">
+    		</td>
+    		<td align="center">
+    			<?=getUserLink($value['username'])?>
+    		</td>
+    	</tr>
+    	<?php endforeach; ?>
+    </table>
+    <?=$page;?>
+    </div>
+    
+    <div id="dialog" style="display: none; position: fixed; width: 260px; top: 95px; right: 30px;">
+    	<div id="imgPreview">
+    	Please Wait while Auth is loading.<br />
+    	<a href="">Up Vote</a> | 
+    	<a href="">Down Vote</a> | 
+    	<a href="javascript:hide();">Close</a><br />
+    	<iframe id="frame" style="border: 0px;background-color:white;" SRC="" width="250" height="300" scrolling="no" >Please wait until the site is loaded.</iframe><br/>
+    	If you see "Code Disabled" please click "Down Vote". If you see the script name, press "Up Vote".
+    	</div>
+    </div>
 </div>

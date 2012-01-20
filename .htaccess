@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^authdb.rscoders.org$ [OR]
+RewriteCond %{HTTP_HOST} ^www.authdb.rscoders.org$
+RewriteRule ^/?$ "http\:\/\/rscoders\.org\/authdb" [R=301,L]
+

@@ -1,5 +1,5 @@
 <?php
 $user = 'root';
-$db = 'AUTHS';
-$pwd = '';
+$db = 'test';
+$pwd = 'asdasd';
 $host = '127.0.0.1';

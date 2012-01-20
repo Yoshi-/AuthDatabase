@@ -7,7 +7,7 @@
 		<div align="center">
 			<input type="submit" id="sstring" value="Filter"/><br/><br/>
 		</div>
-	<select multiple="mutiple" name="filter[]" size="20">
+	<select multiple="multiple" name="filter[]" size="20" id="rounded">
 	<?php
 	$i = 1;
 	foreach($names as $key=>$name): ?>

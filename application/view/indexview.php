@@ -13,7 +13,8 @@ class indexView {
 		$i = 1;
 		while($i <= $page_number) {
 			$data['page'] = $i;
-			
+			if(isset($data['pagenumber'])) unset($data['pagenumber']);
+
 			$pageLink .= '';
 
 			if($i == $page) {

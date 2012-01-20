@@ -1,0 +1,99 @@
+--SQL CODE
+-- phpMyAdmin SQL Dump
+-- version 3.3.9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jan 20, 2012 at 08:49 PM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `test`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auths`
+--
+
+CREATE TABLE IF NOT EXISTS `auths` (
+  `authID` int(10) NOT NULL AUTO_INCREMENT,
+  `auth` varchar(255) NOT NULL,
+  `key` int(10) NOT NULL,
+  `working` int(10) NOT NULL,
+  `name` int(255) NOT NULL,
+  `lastchecked` int(255) NOT NULL,
+  PRIMARY KEY (`authID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `auths`
+--
+
+INSERT INTO `auths` VALUES(1, '671xz6BYT95AFHPC4Y', 671, 4, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `names`
+--
+
+CREATE TABLE IF NOT EXISTS `names` (
+  `nameID` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `key` int(10) NOT NULL,
+  PRIMARY KEY (`nameID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `names`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rate`
+--
+
+CREATE TABLE IF NOT EXISTS `rate` (
+  `rateID` int(10) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(255) NOT NULL,
+  `authID` int(10) NOT NULL,
+  PRIMARY KEY (`rateID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `rate`
+--
+
+INSERT INTO `rate` VALUES(1, '127.0.0.1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `showed`
+--
+
+CREATE TABLE IF NOT EXISTS `showed` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `userID` int(255) NOT NULL,
+  `authID` int(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `showed`
+--
+
+INSERT INTO `showed` VALUES(1, 70, 1);
